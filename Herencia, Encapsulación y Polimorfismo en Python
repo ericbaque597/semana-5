@@ -1,0 +1,78 @@
+# Clase base: Persona
+class Persona:
+    def __init__(self, nombre, edad):
+        self._nombre = nombre  # Atributo protegido (encapsulación)
+        self._edad = edad  # Atributo protegido (encapsulación)
+
+    def mostrar_informacion(self):
+        """Método para mostrar la información de la persona."""
+        return f"Nombre: {self._nombre}, Edad: {self._edad}"
+
+
+# Clase derivada: Estudiante (hereda de Persona)
+class Estudiante(Persona):
+    def __init__(self, nombre, edad, carrera):
+        super().__init__(nombre, edad)  # Llamada al constructor de la clase base
+        self.carrera = carrera
+
+    # Sobrescribiendo el método mostrar_informacion (polimorfismo)
+    def mostrar_informacion(self):
+        return f"Nombre: {self._nombre}, Edad: {self._edad}, Carrera: {self.carrera}"
+
+
+# Clase derivada: Profesor (hereda de Persona)
+class Profesor(Persona):
+    def __init__(self, nombre, edad, materia):
+        super().__init__(nombre, edad)  # Llamada al constructor de la clase base
+        self.materia = materia
+
+    # Sobrescribiendo el método mostrar_informacion (polimorfismo)
+    def mostrar_informacion(self):
+        return f"Nombre: {self._nombre}, Edad: {self._edad}, Materia: {self.materia}"
+
+
+# Clase para demostrar el uso de encapsulación
+class Universidad:
+    def __init__(self):
+        self.__estudiantes = []  # Atributo privado (encapsulación)
+        self.__profesores = []  # Atributo privado (encapsulación)
+
+    def agregar_estudiante(self, estudiante):
+        """Agrega un estudiante a la universidad."""
+        self.__estudiantes.append(estudiante)
+
+    def agregar_profesor(self, profesor):
+        """Agrega un profesor a la universidad."""
+        self.__profesores.append(profesor)
+
+    def mostrar_miembros(self):
+        """Muestra todos los miembros de la universidad."""
+        print("Estudiantes:")
+        for estudiante in self.__estudiantes:
+            print(estudiante.mostrar_informacion())
+
+        print("\nProfesores:")
+        for profesor in self.__profesores:
+            print(profesor.mostrar_informacion())
+
+
+# Creación de objetos y demostración de funcionalidad
+if __name__ == "__main__":
+    # Crear objetos de las clases
+    estudiante1 = Estudiante("Juan Pérez", 20, "Ingeniería en Sistemas")  # Instancia de Estudiante
+    estudiante2 = Estudiante("Ana López", 22, "Matemáticas")  # Instancia de Estudiante
+
+    profesor1 = Profesor("Carlos Gómez", 45, "Programación")  # Instancia de Profesor
+    profesor2 = Profesor("Lucía Martínez", 39, "Estadística")  # Instancia de Profesor
+
+    # Crear una instancia de Universidad
+    universidad = Universidad()
+
+    # Agregar estudiantes y profesores
+    universidad.agregar_estudiante(estudiante1)  # Agregar estudiante1 a la universidad
+    universidad.agregar_estudiante(estudiante2)  # Agregar estudiante2 a la universidad
+    universidad.agregar_profesor(profesor1)  # Agregar profesor1 a la universidad
+    universidad.agregar_profesor(profesor2)  # Agregar profesor2 a la universidad
+
+    # Mostrar todos los miembros de la universidad
+    universidad.mostrar_miembros()
